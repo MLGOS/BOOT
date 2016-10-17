@@ -6,7 +6,7 @@ int 0x10
 mov al, 'G'
 
 #strlength.s
-.include "kernal.asm"
+.include "UNKNOWN_0.asm"
 
 .section .text
 .globl strlength
