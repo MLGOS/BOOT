@@ -5,6 +5,29 @@ mov al, 'L '
 int 0x10
 mov al, 'G'
 
+#strlength.s
+.include "kernal.asm"
+
+.section .text
+.globl strlength
+.type strlength, @function
+strlength:
+ pushl %ebp
+ movl %esp, %ebp
+ movl $0, %ecx
+ movl 8(%ebp), %edx
+read_next_byte:
+ movb (%edx), %al
+ cmpb $END_OF_FILE, %al
+ jle end
+ incl %edx
+ incl %ecx
+ jmp read_next_byte
+end:
+ movl %ecx, %eax
+ popl %ebp
+ ret
+
 jmp $
 
 times 510-($-$$) db 0
